@@ -1,49 +1,34 @@
-﻿void FillArraySpiral(int[,] array)
+﻿void FillArray(int[,,] array)
 {
 
-    int rows = array.GetLength(0);
-    int collumns = array.GetLength(1);
-    int row = 0;
-    int col = 0;
-    int dx = 1;
-    int dy = 0;
-    int dirChanges = 0;
-    int visits = array.GetLength(1);
-    int counter = 1;
+   
+    int counter = 10;
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
         {
-            array[row, col] = counter++;
-            if (--visits == 0) {
-                visits = collumns * (dirChanges %2) + rows * ((dirChanges + 1) %2) - (dirChanges/2 - 1) - 2;
-                int temp = dx;
-                dx = -dy;
-                dy = temp;
-                dirChanges++;
-              }
- 
-              col += dx;
-              row += dy;
+             for (int k = 0; k < array.GetLength(2); k++)
+            {
+                array[i,j,k] = counter++;
+            }
         }
     }
 }
 
-void PrintArray(int[,] array)
+void PrintArray(int[,,] array)
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {
-        Console.Write("[ ");
         for (int j = 0; j < array.GetLength(1); j++)
         {
-            Console.Write(array[i, j] + " ");
+             for (int k = 0; k < array.GetLength(2); k++) {
+                Console.Write($"{array[i,j,k]}({i},{j},{k}) ");
+             }
+             Console.WriteLine("");
         }
-        Console.Write("]");
-        Console.WriteLine("");
     }
 }
 
-
-int[,] numbers = new int[4, 4];
-FillArraySpiral(numbers);
+int[,,] numbers = new int[2, 2, 2];
+FillArray(numbers);
 PrintArray(numbers);
